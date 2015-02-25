@@ -23,7 +23,7 @@
     "php": ">=5.2.1",
     "smarty/smarty": "3.*",
     "components/jquery": "*",
-    "wazaari/ms-dropdown": "dev-master"
+    "components/ms-dropdown": "dev-master"
   },
   "suggest": {
     "smarty-gettext": "*"
