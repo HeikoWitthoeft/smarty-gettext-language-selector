@@ -18,52 +18,12 @@
       "email": "daniel.herrmann1@gmail.com"
     }
   ],
-  "repositories": [
-    {
-      "type": "package",
-      "package": {
-        "name": "marghoobsuleman/ms-Dropdown",
-        "type": "component",
-        "version": "dev-master",
-        "dist": {
-          "url": "https://github.com/marghoobsuleman/ms-Dropdown/archive/master.zip",
-          "type": "zip"
-        },
-        "source": {
-          "url": "https://github.com/marghoobsuleman/ms-Dropdown.git",
-          "type": "git",
-          "reference": "master"
-        },
-        "extra": {
-          "component": {
-            "scripts": [
-              "js/msdropdown/jquery.dd.js"
-            ],
-            "styles": [
-              "css/msdropdown/dd.css",
-              "css/msdropdown/flags.css"
-            ],
-            "files": [
-              "js/msdropdown/jquery.dd.min.js",
-              "images/msdropdown/icons/blank.gif",
-              "images/msdropdown/icons/flagssprite_small.png",
-              "images/msdropdown/skin1/dd_arrow.gif",
-              "images/msdropdown/skin1/title-bg.gif"
-            ]
-          }
-        },
-        "require": {
-          "robloach/component-installer": "*"
-        }
-      }
-    }
-  ],
   "require": {
     "ext-gettext": "*",
     "php": ">=5.2.1",
     "smarty/smarty": "3.*",
     "components/jquery": "*",
-    "marghoobsuleman/ms-Dropdown": "dev-master"
+    "wazaari/ms-dropdown": "dev-master"
   },
   "suggest": {
     "smarty-gettext": "*"
