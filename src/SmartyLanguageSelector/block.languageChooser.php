@@ -11,12 +11,12 @@
  * which will print a DropDown box with the available languages. The function takes a few parameters,
  *  which are documented below:
  *
- *  $languageList               Array of allowed languages, in the format "gettext-shortcode" => "Display Language"
+ * $languageList                Array of allowed languages, in the format "gettext-shortcode" => "Display Language"
  *                              Example "de_DE.utf8" => "Deutsch". Bear in mind that the shortcode needs to match
  *                              the shortcode used by gettext (needs to match the locale available at system)
- *  $inputName                  Name and ID of the select element
- *  $displayFlags = true        Defines whether small language icons shall be displayed or not
- *  $languageFlagMap = array()  Array of shortcodes mapped to an available flag. Only relevant it $displayFlags == true
+ * $inputName=languageSelector  Name and ID of the select element
+ * $displayFlags = true         Defines whether small language icons shall be displayed or not
+ * $languageFlagMap = array()   Array of shortcodes mapped to an available flag. Only relevant it $displayFlags == true
  *                              The array should be in the format "gettext-shortcode" => "flag name w/o file extension"
  *                              Example: "de_DE.utf8" => "de"
  *                              If ($displayFlags == true) and no entry is found, no icon is shown.
@@ -28,6 +28,7 @@
 function smarty_function_printLanguageSelector($params, &$smarty) {
     //Create return String
     $return = "";
+    $inputName = (isset($params["inputName"])) ? $params["inputName"] : "languageSelector";
 
     //Include JS and CSS files
     $return .= "<script src=\"components/jquery/jquery.min.js\"></script>";
@@ -36,7 +37,8 @@ function smarty_function_printLanguageSelector($params, &$smarty) {
     $return .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"components/ms-Dropdown/css/msdropdown/flags.css\" />";
 
     //Create select box
-    $return .= "<select name=\"".$params["inputName"]."\" id=\"".$params["inputName"]."\" style=\"width:300px;\">";
+    $return .= "<form id=\"languageSelectorForm\" action=\"\" method=\"post\">";
+    $return .= "<select name=\"".$inputName."\" id=\"".$inputName."\" style=\"width:300px;\">";
         if (isset($params['languageList']) && is_array($params['languageList'])) {
             foreach ($params['languageList'] AS $value => $display) {
                 $return .= "<option value='".$value."' data-image=\"components/ms-Dropdown/images/msdropdown/icons/blank.gif\" data-imagecss=\"flag ".$params['languageList'][$value]."\" data-title=\"".$display."\">".$display."</option>";
@@ -45,16 +47,17 @@ function smarty_function_printLanguageSelector($params, &$smarty) {
             $return .= "<option value='' data-image=\"components/ms-Dropdown/images/msdropdown/icons/blank.gif\">No Languages</option>";
         }
     $return .= "</select>";
+    $return .= "</form>";
 
     //Add JS Code
     $return .= "
         <script>
             $(document).ready(function() {
-                $(\"#".$params["inputName"]."\").msDropdown();
+                $(\"#".$inputName."\").msDropdown();
             });
 
-            $(\"#".$params["inputName"]."\").change(function() {
-                window.location = \"samepage.php?update=tv_taken&language=\" + $(this).val();
+            $(\"#".$inputName."\").change(function() {
+                $(\"#languageSelectorForm\").submit();
             });
         </script>
     ";
