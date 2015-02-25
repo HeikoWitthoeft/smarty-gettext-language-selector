@@ -1,0 +1,1 @@
+Makes use of https://github.com/marghoobsuleman/ms-Dropdown, includes the libraries. Both released under MIT.
