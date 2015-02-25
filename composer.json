@@ -23,7 +23,7 @@
     "php": ">=5.2.1",
     "smarty/smarty": "3.*",
     "components/jquery": "*",
-    "components/ms-dropdown": "dev-master"
+    "components/msdropdown": ">3"
   },
   "suggest": {
     "smarty-gettext": "*"
