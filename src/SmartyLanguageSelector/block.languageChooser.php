@@ -30,12 +30,6 @@ function smarty_function_printLanguageSelector($params, &$smarty) {
     $return = "";
     $inputName = (isset($params["inputName"])) ? $params["inputName"] : "languageSelector";
 
-    //Include JS and CSS files
-    $return .= "<script src=\"components/jquery/jquery.min.js\"></script>";
-    $return .= "<script src=\"components/ms-Dropdown/js/msdropdown/jquery.dd.min.js\"></script>";
-    $return .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"components/ms-Dropdown/css/msdropdown/dd.css\" />";
-    $return .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"components/ms-Dropdown/css/msdropdown/flags.css\" />";
-
     //Create select box
     $return .= "<form id=\"languageSelectorForm\" action=\"\" method=\"post\">";
     $return .= "<select name=\"".$inputName."\" id=\"".$inputName."\" style=\"width:300px;\">";
