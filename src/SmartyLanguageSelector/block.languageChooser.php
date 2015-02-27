@@ -35,7 +35,7 @@ function smarty_function_printLanguageSelector($params, &$smarty) {
     $return .= "<select name=\"".$inputName."\" id=\"".$inputName."\" style=\"width:300px;\">";
         if (isset($params['languageList']) && is_array($params['languageList'])) {
             foreach ($params['languageList'] AS $value => $display) {
-                $return .= "<option value='".$value."' data-image=\"components/msdropdown/images/msdropdown/icons/blank.gif\" data-imagecss=\"flag ".$params['languageList'][$value]."\" data-title=\"".$display."\">".$display."</option>";
+                $return .= "<option value='".$value."' data-image=\"components/msdropdown/images/msdropdown/icons/blank.gif\" data-imagecss=\"flag ".$params['languageFlagMap'][$value]."\" data-title=\"".$display."\">".$display."</option>";
             }
         } else {
             $return .= "<option value='' data-image=\"components/msdropdown/images/msdropdown/icons/blank.gif\">No Languages</option>";
