@@ -14,6 +14,7 @@
  * $languageList                Array of allowed languages, in the format "gettext-shortcode" => "Display Language"
  *                              Example "de_DE.utf8" => "Deutsch". Bear in mind that the shortcode needs to match
  *                              the shortcode used by gettext (needs to match the locale available at system)
+ * $selectedLanguage            Language currently selected. Used as value for the selector
  * $inputName=languageSelector  Name and ID of the select element
  * $displayFlags = true         Defines whether small language icons shall be displayed or not
  * $languageFlagMap = array()   Array of shortcodes mapped to an available flag. Only relevant it $displayFlags == true
@@ -35,7 +36,7 @@ function smarty_function_printLanguageSelector($params, &$smarty) {
     $return .= "<select name=\"".$inputName."\" id=\"".$inputName."\" style=\"width:300px;\">";
         if (isset($params['languageList']) && is_array($params['languageList'])) {
             foreach ($params['languageList'] AS $value => $display) {
-                $return .= "<option value='".$value."' data-image=\"components/msdropdown/images/msdropdown/icons/blank.gif\" data-imagecss=\"flag ".$params['languageFlagMap'][$value]."\" data-title=\"".$display."\">".$display."</option>";
+                $return .= "<option value='".$value."' data-image=\"components/msdropdown/images/msdropdown/icons/blank.gif\" data-imagecss=\"flag ".$params['languageFlagMap'][$value]."\" data-title=\"".$display."\"".(($params['selectedLanguage'] == $value) ? "selected=\"selected\"" : "").">".$display."</option>";
             }
         } else {
             $return .= "<option value='' data-image=\"components/msdropdown/images/msdropdown/icons/blank.gif\">No Languages</option>";
