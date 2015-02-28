@@ -18,7 +18,7 @@
  * $selectWidth = 300px         Width value of the select field, expressed as CSS property
  * $inputName=languageSelector  Name and ID of the select element
  * $displayFlags = true         Defines whether small language icons shall be displayed or not
- * $languageFlagMap = array()   Array of shortcodes mapped to an available flag. Only relevant it $displayFlags == true
+ * $languageFlagMap = array()   Array of shortcodes mapped to an available flag. Only relevant if $displayFlags == true
  *                              The array should be in the format "gettext-shortcode" => "flag name w/o file extension"
  *                              Example: "de_DE.utf8" => "de"
  *                              If ($displayFlags == true) and no entry is found, no icon is shown.
@@ -27,7 +27,8 @@
  * @param $smarty Smarty reference to the smarty instance
  * @return String The result of execution of this block
  */
-function smarty_function_printLanguageSelector($params, &$smarty) {
+function smarty_function_printLanguageSelector($params, &$smarty)
+{
     //Create return String
     $return = "";
     $inputName = (isset($params["inputName"])) ? $params["inputName"] : "languageSelector";
@@ -36,14 +37,19 @@ function smarty_function_printLanguageSelector($params, &$smarty) {
 
     //Create select box
     $return .= "<form id=\"languageSelectorForm\" action=\"\" method=\"post\">";
-    $return .= "<select name=\"".$inputName."\" id=\"".$inputName."\" style=\"width:".$width.";\">";
-        if (isset($params['languageList']) && is_array($params['languageList'])) {
-            foreach ($params['languageList'] AS $value => $display) {
-                $return .= "<option value='".$value."' data-image=\"components/msdropdown/images/msdropdown/icons/blank.gif\" data-imagecss=\"flag ".$params['languageFlagMap'][$value]."\" data-title=\"".$display."\"".(($params['selectedLanguage'] == $value) ? "selected=\"selected\"" : "").">".$display."</option>";
-            }
-        } else {
-            $return .= "<option value='' data-image=\"components/msdropdown/images/msdropdown/icons/blank.gif\">No Languages</option>";
+    $return .= "<select name=\"" . $inputName . "\" id=\"" . $inputName . "\" style=\"width:" . $width . ";\">";
+    if (isset($params['languageList']) && is_array($params['languageList'])) {
+        foreach ($params['languageList'] as $value => $display) {
+            $return .= "<option value='" . $value . "'" .
+                "data-image=\"components/msdropdown/images/msdropdown/icons/blank.gif\" data-imagecss=\"flag " .
+                $params['languageFlagMap'][$value] . "\" data-title=\"" . $display . "\"" .
+                (($params['selectedLanguage'] == $value) ? "selected=\"selected\"" : "") . ">" .
+                $display . "</option>";
         }
+    } else {
+        $return .= "<option value='' data-image=\"components/msdropdown/images/msdropdown/icons/blank.gif\">".
+            "No Languages</option>";
+    }
     $return .= "</select>";
     $return .= "</form>";
 
@@ -51,10 +57,10 @@ function smarty_function_printLanguageSelector($params, &$smarty) {
     $return .= "
         <script>
             $(document).ready(function() {
-                $(\"#".$inputName."\").msDropdown();
+                $(\"#" . $inputName . "\").msDropdown();
             });
 
-            $(\"#".$inputName."\").change(function() {
+            $(\"#" . $inputName . "\").change(function() {
                 $(\"#languageSelectorForm\").submit();
             });
         </script>

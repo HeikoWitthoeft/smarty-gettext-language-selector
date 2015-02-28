@@ -1,26 +1,16 @@
 <?php
-/**
- * This file is part of smarty-gettext-language-selector. 
- * 
- * File: LanguageSelector.php
- *
- * User: dherrman
- * Date: 24.02.2015
- * Time: 18:42
- *
- * Purpose: Please fill...
- */
-
 namespace SmartyLanguageSelector;
 
 /**
  * Class LanguageSelector
  * @package SmartyLanguageSelector
  */
-class LanguageSelector {
+class LanguageSelector
+{
 
     /**
-     * @var string Name of the HTML select form element, which allows to choose the language. Used to get the result from $_POST
+     * @var string Name of the HTML select form element, which allows to choose the language.
+     *              Used to get the result from $_POST
      */
     public static $inputName = "languageSelector";
 
@@ -34,26 +24,29 @@ class LanguageSelector {
      *
      * @param $textDomain
      * @param $textDomainPath
-     * @param string $defaultLanguage Language to fall back if there is no language specified
      * @return string Returns the chosen locale, which is either the default language or a user-selected language
      * @throws GettextException
      */
-    public static function setGettextLanguage($textDomain, $textDomainPath) {
+    public static function setGettextLanguage($textDomain, $textDomainPath)
+    {
         $chosenLanguage = self::$defaultLanguage;
 
         //Find chosen language
-        if (isset($_POST[self::$inputName])) $chosenLanguage = $_POST[self::$inputName];
+        if (isset($_POST[self::$inputName])) {
+            $chosenLanguage = $_POST[self::$inputName];
+        }
 
         //Perform Gettext settings
         putenv("LC_ALL=$chosenLanguage");
         $res = setlocale(LC_ALL, $chosenLanguage);
         if (!$res) {
-            throw new GettextException("Unable to set locale to ".$chosenLanguage.". The language was not understood by your system.");
+            throw new GettextException(
+                "Unable to set locale to ".$chosenLanguage.". The language was not understood by your system."
+            );
         }
         bindtextdomain($textDomain, $textDomainPath);
         textdomain($textDomain);
 
         return $chosenLanguage;
     }
-
 }
